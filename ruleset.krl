@@ -7,15 +7,17 @@ ruleset b505198x1 {
     dispatch {
         
     }
-    rule example_5 {
+    rule exercise_6 {
         select when pageview ".*" setting ()
         pre {
             count = ent:count + 1;
+            query = page:url("query");
         }
         if count <= 5 then
             notify("Fired count", count) with sticky = true;
         fired {
-            ent:count += 1 from 0
+            clear ent:count if query.match(re/clear=/);
+            ent:count += 1 from 1;
         }
     }
 }
