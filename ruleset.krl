@@ -9,9 +9,13 @@ ruleset b505198x1 {
     }
     rule first_rule {
         select when pageview ".*" setting ()
+        pre {
+            query = page:url("query");
+        }
         every {
             notify("Hello World", "This is a sample rule.") with sticky = true;
             notify("Another Notify", "Second notification.") with sticky = true;
+            notify("Third Notify", "Yet another notification, query = " + query) with sticky = true;
         }
     }
 }
