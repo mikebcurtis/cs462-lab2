@@ -7,16 +7,23 @@ ruleset b505198x1 {
     dispatch {
        
     }
-    rule exercise_7 {
+    rule exercise_5_first {
         select when pageview ".*" setting ()
         pre {
-            count = app:count + 1;
         }
-        if count <= 5 then
-            notify("Fired count", count) with sticky = true;
-        fired {
-            app:count += 1 from 1
+        every {
+            notify("Hello World", "This is a sample rule.") with sticky = true;
+            notify("Another Notify", "Second notification.") with sticky = true;
+        }
+    }
+    
+    rule exercise_5_second {
+        select when pageview ".*" setting ()
+        pre {
+            query = page:url("query");
+        }
+        every {
+            notify("Third Notify", query eq "" => "Hello Monkey" | "Hello " + query) with sticky = true;
         }
     }
 }
-
