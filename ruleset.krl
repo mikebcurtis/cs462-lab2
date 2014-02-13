@@ -12,10 +12,15 @@ ruleset b505198x1 {
         pre {
             query = page:url("query");
         }
-        every {
+        if query eq "" {
             notify("Hello World", "This is a sample rule.") with sticky = true;
             notify("Another Notify", "Second notification.") with sticky = true;
-            notify("Third Notify", "Yet another notification, query = " + query) with sticky = true;
+            notify("Third Notify", "Hello Monkey") with sticky = true;
+        }
+        else {
+            notify("Hello World", "This is a sample rule.") with sticky = true;
+            notify("Another Notify", "Second notification.") with sticky = true;
+            notify("Third Notify", "Hello " + query) with sticky = true;
         }
     }
 }
