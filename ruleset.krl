@@ -7,23 +7,17 @@ ruleset b505198x1 {
     dispatch {
        
     }
-    rule exercise_5_first {
+    rule exercise_4 {
         select when pageview ".*" setting ()
         pre {
+            get_name = function(query) {
+                res_arr = query.extract(re/name=(\w+)/g)
+                res_arr[0]
+            };
+            name = get_name(page:url("query"))
         }
         every {
-            notify("Hello World", "This is a sample rule.") with sticky = true;
-            notify("Another Notify", "Second notification.") with sticky = true;
-        }
-    }
-    
-    rule exercise_5_second {
-        select when pageview ".*" setting ()
-        pre {
-            query = page:url("query");
-        }
-        every {
-            notify("Third Notify", query eq "" => "Hello Monkey" | "Hello " + query) with sticky = true;
+            notify("Third Notify", name eq "" => "Hello Monkey" | "Hello " + name) with sticky = true;
         }
     }
 }
