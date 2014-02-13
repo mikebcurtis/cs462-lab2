@@ -12,9 +12,8 @@ ruleset b505198x1 {
         pre {
             fired = ent:fired + 1
         }
-        if fired <= 5 {
+        if fired <= 5 then
             notify("Fired count", fired) with sticky = true;
-        }
     }
 }
 
