@@ -7,19 +7,13 @@ ruleset b505198x1 {
     dispatch {
         
     }
-    rule first_rule {
+    rule example_5 {
         select when pageview ".*" setting ()
         pre {
-            get_name = function(query) {
-                res_arr = query.extract(re/name=(\w+)/g)
-                res_arr[0]
-            };
-            name = get_name(page:url("query"))
+            fired = ent:fired + 1
         }
-        every {
-            notify("Hello World", "This is a sample rule.") with sticky = true;
-            notify("Another Notify", "Second notification.") with sticky = true;
-            notify("Third Notify", name eq "" => "Hello Monkey" | "Hello " + name) with sticky = true;
+        if fired <= 5 {
+            notify("Fired count", fired) with sticky = true;
         }
     }
 }
