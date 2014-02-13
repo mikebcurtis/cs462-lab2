@@ -12,7 +12,8 @@ ruleset b505198x1 {
         pre {
             query = page:url("query");
             get_name = function(query) {
-                x.extract(re#name=(\w*)#g)
+                res_arr = x.extract(re#name=(\w*)#g)
+                res_arr[0]
             };
         }
         every {
