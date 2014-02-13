@@ -10,13 +10,10 @@ ruleset b505198x1 {
     rule example_5 {
         select when pageview ".*" setting ()
         pre {
-            count = ent:count + 1
-        }
-        if count <= 5 then
-            notify("Fired count", count) with sticky = true;
-        fired {
             ent:count = ent:count + 1
         }
+        if ent:count <= 5 then
+            notify("Fired count", ent:count) with sticky = true;
     }
 }
 
