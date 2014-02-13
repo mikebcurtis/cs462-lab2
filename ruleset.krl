@@ -7,17 +7,15 @@ ruleset b505198x1 {
     dispatch {
        
     }
-    rule exercise_4 {
+    rule exercise_7 {
         select when pageview ".*" setting ()
         pre {
-            get_name = function(query) {
-                res_arr = query.extract(re/name=(\w+)/g)
-                res_arr[0]
-            };
-            name = get_name(page:url("query"))
+            count = app:count + 1;
         }
-        every {
-            notify("Third Notify", name eq "" => "Hello Monkey" | "Hello " + name) with sticky = true;
+        if count <= 5 then
+            notify("Fired count", count) with sticky = true;
+        fired {
+            app:count += 1 from 1
         }
     }
 }
