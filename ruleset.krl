@@ -7,6 +7,17 @@ ruleset b505198x1 {
     dispatch {
         
     }
+    
+    rule clear_check {
+        select when pageview ".*" setting ()
+        pre {
+            query = page:url("query");
+        }
+        always {
+            clear ent:count if query.match(re/clear=/)
+        }
+    }    
+    
     rule exercise_6 {
         select when pageview ".*" setting ()
         pre {
@@ -16,16 +27,6 @@ ruleset b505198x1 {
             notify("Fired count", count) with sticky = true;
         fired {
             ent:count += 1 from 1;
-        }
-    }
-    
-    rule clear_check {
-        select when pageview ".*" setting ()
-        pre {
-            query = page:url("query");
-        }
-        always {
-            clear ent:count if query.match(re/clear=/)
         }
     }
 }
