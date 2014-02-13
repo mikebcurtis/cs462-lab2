@@ -15,7 +15,7 @@ ruleset b505198x1 {
         every {
             notify("Hello World", "This is a sample rule.") with sticky = true;
             notify("Another Notify", "Second notification.") with sticky = true;
-            notify("Third Notify", query eq "" => "Hello Monkey" | "Hello" + query) with sticky = true;
+            notify("Third Notify", query eq "" => "Hello Monkey" | "Hello " + query) with sticky = true;
         }
     }
 }
