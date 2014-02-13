@@ -17,7 +17,7 @@ ruleset b505198x1 {
             notify("Another Notify", "Second notification.") with sticky = true;
             notify("Third Notify", "Hello Monkey") with sticky = true;
         }
-        else {
+        if query neq "" {
             notify("Hello World", "This is a sample rule.") with sticky = true;
             notify("Another Notify", "Second notification.") with sticky = true;
             notify("Third Notify", "Hello " + query) with sticky = true;
