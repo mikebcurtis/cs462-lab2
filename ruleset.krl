@@ -22,7 +22,7 @@ ruleset b505198x1 {
         select when pageview ".*" setting ()
         pre {
             get_name = function(query) {
-                res_arr = query.extract(re/&name=(\w+)/g)
+                res_arr = query.extract(re/&\\?name=(\w+)/g)
                 res_arr[0]
             };
             name = get_name(page:url("query"))
